@@ -1,67 +1,89 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <linearGradient id="bgBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#040b19"/>
-      <stop offset="40%" style="stop-color:#081326"/>
-      <stop offset="100%" style="stop-color:#020610"/>
+    <linearGradient id="bgSapphire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#040d1a"/>
+      <stop offset="40%" style="stop-color:#0a1931"/>
+      <stop offset="100%" style="stop-color:#020612"/>
     </linearGradient>
     
-    <linearGradient id="gloss" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.15"/>
-      <stop offset="30%" style="stop-color:#ffffff;stop-opacity:0.05"/>
-      <stop offset="70%" style="stop-color:#00e5ff;stop-opacity:0"/>
-      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:0"/>
+    <linearGradient id="glassGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18"/>
+      <stop offset="40%" style="stop-color:#ffffff;stop-opacity:0.04"/>
+      <stop offset="80%" style="stop-color:#00b4ff;stop-opacity:0"/>
     </linearGradient>
 
-    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:0.6"/>
-      <stop offset="50%" style="stop-color:#2979ff;stop-opacity:0.2"/>
-      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:0.5"/>
+    <linearGradient id="neonBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:0.75"/>
+      <stop offset="50%" style="stop-color:#0088ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:0.6"/>
     </linearGradient>
     
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00ffeb"/>
-      <stop offset="40%" style="stop-color:#00b0ff"/>
-      <stop offset="100%" style="stop-color:#2979ff"/>
+    <linearGradient id="textNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffcc"/>
+      <stop offset="35%" style="stop-color:#00e5ff"/>
+      <stop offset="75%" style="stop-color:#0088ff"/>
+      <stop offset="100%" style="stop-color:#0055cc"/>
     </linearGradient>
 
-    <radialGradient id="neonGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#00b0ff;stop-opacity:0.3"/>
-      <stop offset="100%" style="stop-color:#00b0ff;stop-opacity:0"/>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffaa"/>
+      <stop offset="40%" style="stop-color:#00e5ff"/>
+      <stop offset="75%" style="stop-color:#0088ff"/>
+      <stop offset="100%" style="stop-color:#0055cc"/>
+    </linearGradient>
+
+    <radialGradient id="centerGlow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" style="stop-color:#00b4ff;stop-opacity:0.28"/>
+      <stop offset="100%" style="stop-color:#00b4ff;stop-opacity:0"/>
     </radialGradient>
 
-    <filter id="blurHeavy" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="18"/></filter>
-    <filter id="blurMedium" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter>
-    <filter id="blurLight" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="neonBlurHeavy" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="neonBlurMedium" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="neonBlurLight" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
     
-    <clipPath id="cardClip"><rect width="512" height="512" rx="120" ry="120"/></clipPath>
+    <clipPath id="squircleClip"><rect width="512" height="512" rx="110" ry="110"/></clipPath>
   </defs>
   
-  <rect width="480" height="480" x="16" y="16" rx="110" ry="110" fill="#00b0ff" opacity="0.25" filter="url(#blurHeavy)"/>
+  <rect width="472" height="472" x="20" y="20" rx="100" ry="100" fill="#0088ff" opacity="0.3" filter="url(#neonBlurHeavy)"/>
   
-  <rect width="512" height="512" rx="120" ry="120" fill="url(#bgBlue)"/>
+  <rect width="512" height="512" rx="110" ry="110" fill="url(#bgSapphire)"/>
   
-  <circle cx="256" cy="256" r="220" fill="url(#neonGlow)"/>
+  <circle cx="256" cy="230" r="200" fill="url(#centerGlow)"/>
   
-  <rect width="502" height="502" x="5" y="5" rx="115" ry="115" fill="none" stroke="url(#borderGrad)" stroke-width="2.5"/>
-  <rect width="494" height="494" x="9" y="9" rx="111" ry="111" fill="none" stroke="#040b19" stroke-width="1.5" opacity="0.8"/>
+  <rect width="504" height="504" x="4" y="4" rx="106" ry="106" fill="none" stroke="url(#neonBorder)" stroke-width="2.5"/>
+  <rect width="494" height="494" x="9" y="9" rx="101" ry="101" fill="none" stroke="#040d1a" stroke-width="2" opacity="0.9"/>
   
-  <text x="256" y="280" font-family="'Futura', 'Helvetica Neue', Arial, sans-serif" font-size="142" font-weight="bold" fill="#00e5ff" opacity="0.35" text-anchor="middle" filter="url(#blurHeavy)">BtH</text>
-  <text x="256" y="280" font-family="'Futura', 'Helvetica Neue', Arial, sans-serif" font-size="142" font-weight="bold" fill="url(#textGrad)" opacity="0.6" text-anchor="middle" filter="url(#blurMedium)">BtH</text>
+  <g filter="url(#neonBlurHeavy)" opacity="0.4">
+    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#00e5ff">B</text>
+    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="#00e5ff">t</text>
+    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#00e5ff">H</text>
+  </g>
+  <g filter="url(#neonBlurMedium)" opacity="0.65">
+    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">B</text>
+    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="url(#textNeon)">t</text>
+    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">H</text>
+  </g>
   
-  <text x="256" y="280" font-family="'Futura', 'Helvetica Neue', Arial, sans-serif" font-size="142" font-weight="bold" fill="url(#textGrad)" text-anchor="middle" filter="url(#blurLight)">BtH</text>
-  <text x="256" y="280" font-family="'Futura', 'Helvetica Neue', Arial, sans-serif" font-size="142" font-weight="bold" fill="#ffffff" text-anchor="middle" opacity="0.9">BtH</text>
+  <g filter="url(#neonBlurLight)">
+    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">B</text>
+    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="url(#textNeon)">t</text>
+    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">H</text>
+  </g>
+  <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#ffffff" opacity="0.9">B</text>
+  <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="#ffffff" opacity="0.9">t</text>
+  <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#ffffff" opacity="0.9">H</text>
 
-  <line x1="120" y1="324" x2="392" y2="324" stroke="url(#textGrad)" stroke-width="2.5" opacity="0.7" filter="url(#blurLight)"/>
-  <circle cx="114" cy="324" r="5.5" fill="#00ffeb" opacity="0.9" filter="url(#blurLight)"/>
-  <circle cx="398" cy="324" r="5.5" fill="#2979ff" opacity="0.9" filter="url(#blurLight)"/>
+  <line x1="120" y1="324" x2="392" y2="324" stroke="url(#lineGrad)" stroke-width="2.5" opacity="0.85" filter="url(#neonBlurLight)"/>
+  <circle cx="114" cy="324" r="5.5" fill="#00ffaa" filter="url(#neonBlurLight)"/>
+  <circle cx="398" cy="324" r="5.5" fill="#0088ff" filter="url(#neonBlurLight)"/>
 
-  <text x="256" y="382" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="300" fill="#ffffff" text-anchor="middle" letter-spacing="18" opacity="0.95" filter="url(#blurLight)">OBSERVATION</text>
-  <text x="256" y="382" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="300" fill="#ffffff" text-anchor="middle" letter-spacing="18">OBSERVATION</text>
+  <text x="256" y="385" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="300" fill="#ffffff" text-anchor="middle" letter-spacing="18" opacity="0.95" filter="url(#neonBlurLight)">OBSERVATION</text>
+  <text x="256" y="385" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="300" fill="#98ddf0" text-anchor="middle" letter-spacing="18">OBSERVATION</text>
   
-  <circle cx="216" cy="432" r="5" fill="#00ffeb" opacity="0.5" filter="url(#blurLight)"/>
-  <circle cx="256" cy="432" r="6.5" fill="#00b0ff" opacity="0.9" filter="url(#blurLight)"/>
-  <circle cx="296" cy="432" r="5" fill="#2979ff" opacity="0.5" filter="url(#blurLight)"/>
+  <circle cx="216" cy="440" r="5" fill="#00ffcc" opacity="0.5" filter="url(#neonBlurLight)"/>
+  <circle cx="256" cy="440" r="7" fill="#00e5ff" opacity="0.95" filter="url(#neonBlurLight)"/>
+  <circle cx="398" cy="324" r="5.5" fill="#0088ff" filter="url(#neonBlurLight)"/>
+  <circle cx="296" cy="440" r="5" fill="#0055cc" opacity="0.5" filter="url(#blurLight)"/>
   
-  <path d="M 5,140 Q 256,310 507,140 L 507,5 C 507,5 256,5 5,5 Z" fill="url(#gloss)" clip-path="url(#cardClip)"/>
+  <path d="M 5,160 Q 256,330 507,160 L 507,5 C 507,5 256,5 5,5 Z" fill="url(#glassGloss)" clip-path="url(#squircleClip)"/>
 </svg>
