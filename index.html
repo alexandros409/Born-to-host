@@ -1,698 +1,96 @@
-# <!DOCTYPE html>
-<html lang="el">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Born to Host</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#f5f4f0;
-  --white:#ffffff;
-  --border:#d8d4cc;
-  --border2:#b8b2a8;
-  --text:#111008;
-  --text2:#2a2820;
-  --muted:#6b6560;
-  --label:#1a1814;
-  --hint:#5a5650;
-  --accent:#7a5c10;
-  --accent-bg:#fdf3d8;
-  --accent-border:#d4b060;
-  --green:#1d5c3a;
-  --green-bg:#e8f5ee;
-  --green-border:#80c4a0;
-  --blue:#1e3a6c;
-  --blue-bg:#e8f0f8;
-  --tag-bg:#e8e4dc;
-  --shadow:0 1px 4px rgba(0,0,0,.10),0 1px 2px rgba(0,0,0,.06);
-  --shadow-lg:0 4px 16px rgba(0,0,0,.12);
-}
-html,body{background:var(--bg);min-height:100vh;font-family:'Inter',sans-serif;color:var(--text);font-size:15px;line-height:1.6}
-.app{max-width:420px;margin:0 auto;min-height:100vh;background:var(--bg)}
-
-/* TOPBAR */
-.topbar{background:var(--white);border-bottom:2px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;box-shadow:var(--shadow)}
-.tb-back{background:none;border:none;color:var(--text2);font-size:1.4rem;cursor:pointer;padding:2px 8px 2px 0;line-height:1;font-weight:700}
-.tb-title{font-family:'Lora',serif;font-size:1.05rem;font-weight:600;color:var(--text);flex:1}
-.tb-sub{font-size:0.65rem;color:var(--muted);margin-top:1px;font-weight:500}
-.view{display:none}.view.active{display:block}
-
-/* HOME */
-.home-header{background:var(--white);padding:28px 20px 24px;border-bottom:2px solid var(--border)}
-.home-date{font-size:0.72rem;color:var(--muted);letter-spacing:0.04em;margin-bottom:10px;text-transform:capitalize;font-weight:500}
-.home-title{font-family:'Lora',serif;font-size:1.65rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:4px}
-.home-sub{font-size:0.78rem;color:var(--muted);font-weight:500}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--border);background:var(--white)}
-.stat{padding:14px 10px;text-align:center;border-right:1px solid var(--border)}
-.stat:last-child{border-right:none}
-.stat-n{font-family:'Lora',serif;font-size:1.65rem;color:var(--accent);font-weight:600}
-.stat-l{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;font-weight:600}
-.menu{padding:16px;display:flex;flex-direction:column;gap:10px}
-.menu-btn{background:var(--white);border:2px solid var(--border);border-radius:10px;padding:15px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);text-align:left;width:100%}
-.menu-btn:active{background:var(--bg);border-color:var(--border2)}
-.menu-btn.primary{background:var(--accent-bg);border-color:var(--accent-border)}
-.menu-btn.green{background:var(--green-bg);border-color:var(--green-border)}
-.menu-btn.blue{background:var(--blue-bg);border-color:#90b0d8}
-.mb-ico{font-size:1.3rem;width:28px;text-align:center;flex-shrink:0}
-.mb-title{font-size:0.88rem;font-weight:700;color:var(--text)}
-.mb-sub{font-size:0.7rem;color:var(--muted);margin-top:2px;font-weight:500}
-.mb-arrow{color:var(--muted);font-size:1.1rem;font-weight:700}
-.qbanner{margin:0 0 4px;background:var(--green-bg);border:2px solid var(--green-border);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
-.qb-label{font-size:0.68rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
-.qb-count{font-family:'Lora',serif;font-size:1rem;color:var(--text);margin-top:2px;font-weight:600}
-.qb-btn{background:var(--green);color:#fff;border:none;border-radius:6px;padding:7px 13px;font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:600;cursor:pointer}
-
-/* QUICK */
-.qc-wrap{padding:20px}
-.qc-heading{font-family:'Lora',serif;font-size:1.5rem;color:var(--text);margin-bottom:6px;font-weight:600}
-.qc-hint{font-size:0.78rem;color:var(--hint);line-height:1.7;margin-bottom:18px;font-weight:500}
-.qc-ta{width:100%;background:var(--white);border:2px solid var(--border);border-radius:10px;padding:14px;font-family:'Lora',serif;font-size:1.1rem;color:var(--text);resize:none;height:120px;outline:none;line-height:1.55;transition:border-color .2s;box-shadow:var(--shadow)}
-.qc-ta:focus{border-color:var(--accent)}
-.qc-ta::placeholder{color:#9a9490;font-style:italic}
-.qc-examples{margin:14px 0 20px}
-.qc-ex{font-size:0.7rem;font-style:italic;color:var(--hint);padding:8px 0;border-top:1px solid var(--border);font-weight:500}
-
-/* FORM */
-.form-wrap{padding:16px;display:flex;flex-direction:column;gap:18px;padding-bottom:60px}
-.fg{display:flex;flex-direction:column;gap:7px}
-
-/* LABELS — HIGH CONTRAST */
-.flbl{font-size:0.78rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--label)}
-.fhint{font-size:0.72rem;color:var(--hint);line-height:1.55;font-weight:500}
-
-.finput{background:var(--white);border:2px solid var(--border);border-radius:8px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--text);outline:none;width:100%;transition:border-color .2s;box-shadow:var(--shadow);-webkit-appearance:none;font-weight:500}
-.finput:focus{border-color:var(--accent)}
-.finput::placeholder{color:#9a9490;font-weight:400}
-input[type=date].finput{color-scheme:light}
-
-.fta{background:var(--white);border:2px solid var(--border);border-radius:8px;padding:13px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text);resize:none;min-height:90px;outline:none;width:100%;transition:border-color .2s;line-height:1.7;display:block;box-shadow:var(--shadow);font-weight:400}
-.fta:focus{border-color:var(--accent)}
-.fta::placeholder{color:#9a9490;font-style:italic}
-
-.divider-lbl{font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);padding:6px 0 4px;border-bottom:2px solid var(--accent-border)}
-
-/* CHIPS */
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{background:var(--white);border:2px solid var(--border);border-radius:20px;padding:7px 14px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;color:var(--text2);transition:all .15s;-webkit-appearance:none;font-weight:600}
-.chip:active{opacity:.8}
-.chip.sel{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-
-/* CATEGORIES */
-.catlist{display:flex;flex-direction:column;gap:7px}
-.catitem{background:var(--white);border:2px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow)}
-.catitem:active{opacity:.85}
-.catitem.sel{background:var(--accent-bg);border-color:var(--accent)}
-.cat-ico{font-size:1.1rem;width:24px;text-align:center;flex-shrink:0}
-.cat-nm{font-size:0.82rem;font-weight:700;color:var(--text)}
-.cat-ds{font-size:0.67rem;color:var(--hint);margin-top:1px;font-weight:500}
-.cat-ck{font-size:.9rem;color:var(--accent);margin-left:auto;flex-shrink:0;font-weight:700}
-
-/* ENERGY */
-.energy-row{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
-.en-btn{background:var(--white);border:2px solid var(--border);border-radius:8px;padding:11px 4px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:700;color:var(--text2);text-align:center;transition:all .15s}
-.en-btn.sel{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-.en-labels{display:grid;grid-template-columns:1fr 1fr;font-size:0.65rem;color:var(--hint);margin-top:5px;font-weight:600}
-.en-labels span:last-child{text-align:right}
-
-/* TOGGLE */
-.tgl-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-top:2px solid var(--border)}
-.tgl-lbl{font-size:0.88rem;font-weight:700;color:var(--text)}
-.tgl-sub{font-size:0.7rem;color:var(--hint);margin-top:2px;font-weight:500}
-.tgl{width:48px;height:28px;border-radius:14px;background:var(--border2);border:none;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.tgl.on{background:var(--accent)}
-.tgl-dot{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.25)}
-.tgl.on .tgl-dot{left:23px}
-
-/* PHRASE */
-.phrase-field{background:var(--accent-bg);border:2px solid var(--accent-border);border-radius:10px;padding:15px}
-.phrase-lbl{font-size:0.7rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.phrase-ta{background:transparent;border:none;outline:none;width:100%;font-family:'Lora',serif;font-style:italic;font-size:1.05rem;color:var(--text);resize:none;min-height:65px;line-height:1.65}
-.phrase-ta::placeholder{color:#b89040;font-style:italic}
-
-/* SAVE BTN */
-.btn-save{background:var(--text);color:#fff;border:none;border-radius:10px;padding:16px;width:100%;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:opacity .15s;letter-spacing:0.02em;margin-top:4px}
-.btn-save:active{opacity:.85}
-.btn-save.green{background:var(--green)}
-
-/* VAULT */
-.vsearch-wrap{background:var(--white);border-bottom:2px solid var(--border);padding:10px 14px;position:sticky;top:57px;z-index:40}
-.vsearch{background:var(--bg);border:2px solid var(--border);border-radius:8px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--text);width:100%;outline:none;transition:border-color .2s;font-weight:500}
-.vsearch:focus{border-color:var(--accent)}
-.vsearch::placeholder{color:var(--muted)}
-.vfilters{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;border-bottom:2px solid var(--border)}
-.vfilters::-webkit-scrollbar{display:none}
-.vfc{background:var(--white);border:2px solid var(--border);border-radius:20px;padding:6px 13px;font-size:0.68rem;letter-spacing:.03em;white-space:nowrap;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all .12s}
-.vfc.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-.elist{display:flex;flex-direction:column}
-.erow{padding:15px 16px;border-bottom:2px solid var(--border);cursor:pointer;display:flex;gap:12px;transition:background .1s;background:var(--white)}
-.erow:active{background:var(--bg)}
-.erow.quick{border-left:4px solid var(--green)}
-.erow.weekly{border-left:4px solid var(--blue)}
-.er-date{font-size:0.64rem;color:var(--muted);white-space:nowrap;min-width:54px;padding-top:3px;line-height:1.5;font-weight:600}
-.er-body{flex:1;min-width:0}
-.er-title{font-family:'Lora',serif;font-size:1.02rem;color:var(--text);line-height:1.35;margin-bottom:5px;font-weight:600}
-.er-meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
-.er-tag{font-size:0.62rem;background:var(--tag-bg);color:var(--text2);padding:3px 9px;border-radius:4px;font-weight:700}
-.badge{font-size:0.58rem;padding:2px 8px;border-radius:10px;font-weight:700}
-.bq{background:var(--green-bg);color:var(--green)}
-.bs{background:var(--accent-bg);color:var(--accent)}
-.bw{background:var(--blue-bg);color:var(--blue)}
-.empty{padding:60px 24px;text-align:center}
-.empty-ico{font-size:2.5rem;margin-bottom:14px}
-.empty-h{font-family:'Lora',serif;font-size:1.2rem;color:var(--text);margin-bottom:8px;font-weight:600}
-.empty-p{font-size:0.75rem;color:var(--muted);line-height:1.8;font-weight:500}
-.expbar{padding:14px 16px;border-top:2px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--white)}
-.expbtn{background:none;border:2px solid var(--border);border-radius:6px;padding:7px 13px;font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:600;color:var(--muted);cursor:pointer}
-
-/* DETAIL */
-.dbody{padding:18px;display:flex;flex-direction:column;gap:17px;padding-bottom:60px}
-.dtitle{font-family:'Lora',serif;font-size:1.55rem;color:var(--text);line-height:1.35;font-weight:600}
-.dmeta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding-bottom:14px;border-bottom:2px solid var(--border)}
-.dmeta-date{font-size:0.67rem;color:var(--muted);font-weight:600}
-.dtag{background:var(--tag-bg);border-radius:5px;padding:3px 9px;font-size:0.64rem;color:var(--text2);font-weight:700}
-.dsec{display:flex;flex-direction:column;gap:6px}
-.dsec-lbl{font-size:0.65rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--label)}
-.dsec-txt{font-size:0.9rem;line-height:1.75;color:var(--text);font-weight:400}
-.dsec-phrase{font-family:'Lora',serif;font-style:italic;font-size:1.05rem;color:var(--accent);line-height:1.65;padding:13px 15px;background:var(--accent-bg);border-left:4px solid var(--accent-border);border-radius:0 8px 8px 0}
-.exp-banner{background:var(--green-bg);border:2px solid var(--green-border);border-radius:10px;padding:14px}
-.exp-banner-t{font-size:0.68rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
-.dactions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dbtn{border:none;border-radius:8px;padding:13px;font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:700;cursor:pointer;letter-spacing:.02em}
-.dbtn.edit{background:var(--text);color:#fff}
-.dbtn.del{background:#fde8e6;color:#b02010}
-
-/* WEEKLY */
-.weekly-intro{background:var(--blue-bg);border:2px solid #90b0d8;border-radius:10px;padding:14px}
-.wi-lbl{font-size:0.65rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.wi-txt{font-size:0.78rem;color:var(--text2);line-height:1.65;font-weight:500}
-.phrase-field.blue{background:var(--blue-bg);border-color:#90b0d8}
-.phrase-field.blue .phrase-lbl{color:var(--blue)}
-.phrase-field.blue .phrase-ta::placeholder{color:#6080b0}
-
-/* TOAST */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:11px 24px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:600;z-index:200;animation:tin .25s ease;white-space:nowrap;pointer-events:none;box-shadow:var(--shadow-lg)}
-@keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+  body { background: #0b0c10; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; gap: 40px; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .label { color: #a4b3c6; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; text-align: center; font-weight: 600; }
+  .variant { display: flex; flex-direction: column; align-items: center; background: #13151a; padding: 25px; r_x: 24px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 </style>
 </head>
 <body>
-<div class="app">
 
-<!-- HOME -->
-<div id="v-home" class="view active">
-  <div class="home-header">
-    <div class="home-date" id="home-day"></div>
-    <div class="home-title">Born to Host</div>
-    <div class="home-sub">Observation Vault</div>
-  </div>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-n" id="home-count">0</div><div class="stat-l">Σύνολο</div></div>
-    <div class="stat"><div class="stat-n" id="home-quick">0</div><div class="stat-l">Quick</div></div>
-    <div class="stat"><div class="stat-n" id="home-worth">0</div><div class="stat-l">Σημαντικά</div></div>
-  </div>
-  <div class="menu">
-    <div id="qbanner" style="display:none" class="qbanner">
-      <div><div class="qb-label">⚡ Αναμένουν επέκταση</div><div class="qb-count" id="qbanner-count"></div></div>
-      <button class="qb-btn" onclick="goView('v-vault');renderVault()">Δες →</button>
-    </div>
-    <button class="menu-btn primary" onclick="openEntry()">
-      <span class="mb-ico">✏️</span>
-      <div style="flex:1"><div class="mb-title">Νέα Καταχώρηση</div><div class="mb-sub">Evening entry · 5–10 λεπτά</div></div>
-      <span class="mb-arrow">›</span>
-    </button>
-    <button class="menu-btn green" onclick="goView('v-quick')">
-      <span class="mb-ico">⚡</span>
-      <div style="flex:1"><div class="mb-title">Quick Capture</div><div class="mb-sub">Αγκίστρι για το βράδυ · 10 δευτ.</div></div>
-      <span class="mb-arrow">›</span>
-    </button>
-    <button class="menu-btn blue" onclick="openWeekly()">
-      <span class="mb-ico">📅</span>
-      <div style="flex:1"><div class="mb-title">Weekly Review</div><div class="mb-sub">Κάθε Κυριακή · 15 λεπτά</div></div>
-      <span class="mb-arrow">›</span>
-    </button>
-    <button class="menu-btn" onclick="goView('v-vault');renderVault()">
-      <span class="mb-ico">📚</span>
-      <div style="flex:1"><div class="mb-title">Vault</div><div class="mb-sub">Όλες οι καταχωρήσεις</div></div>
-      <span class="mb-arrow">›</span>
-    </button>
-  </div>
+<div class="variant">
+  <div class="label">Born to Host — Platinum Gold</div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="220" height="220">
+    <defs>
+      <linearGradient id="bgGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#0d0d0d"/>
+        <stop offset="50%" style="stop-color:#141414"/>
+        <stop offset="100%" style="stop-color:#050505"/>
+      </linearGradient>
+      <linearGradient id="glossGold" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.12"/>
+        <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.02"/>
+        <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+      </linearGradient>
+      <linearGradient id="textGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ffeead"/>
+        <stop offset="50%" style="stop-color:#caa455"/>
+        <stop offset="100%" style="stop-color:#9a7432"/>
+      </linearGradient>
+      <radialGradient id="pulseGold" cx="50%" cy="46%" r="45%">
+        <stop offset="0%" style="stop-color:#caa455;stop-opacity:0.15"/>
+        <stop offset="100%" style="stop-color:#caa455;stop-opacity:0"/>
+      </radialGradient>
+      <filter id="glowG1"><feGaussianBlur stdDeviation="15" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="glowG2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <clipPath id="clipG"><rect width="512" height="512" rx="120" ry="120"/></clipPath>
+    </defs>
+    
+    <rect width="512" height="512" rx="120" ry="120" fill="url(#bgGold)"/>
+    <rect width="512" height="512" rx="120" ry="120" fill="url(#pulseGold)"/>
+    <rect width="504" height="504" x="4" y="4" rx="116" ry="116" fill="none" stroke="url(#textGold)" stroke-width="1.5" opacity="0.25"/>
+    
+    <ellipse cx="256" cy="90" rx="240" ry="100" fill="url(#glossGold)" clip-path="url(#clipG)"/>
+    
+    <text x="256" y="285" font-family="'Times New Roman', Georgia, serif" font-size="160" font-weight="bold" font-style="italic" fill="url(#textGold)" text-anchor="middle" filter="url(#glowG2)">BtH</text>
+    
+    <line x1="120" y1="320" x2="392" y2="320" stroke="url(#textGold)" stroke-width="1" opacity="0.4"/>
+    <circle cx="256" cy="320" r="3" fill="#ffeead" opacity="0.7"/>
+    
+    <text x="256" y="375" font-family="'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="300" fill="#caa455" text-anchor="middle" letter-spacing="14" opacity="0.9">OBSERVATION</text>
+    <text x="256" y="415" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" fill="#ffeead" text-anchor="middle" letter-spacing="6" opacity="0.4">HUMAN EXPERIENCE</text>
+  </svg>
 </div>
 
-<!-- QUICK CAPTURE -->
-<div id="v-quick" class="view">
-  <div class="topbar">
-    <button class="tb-back" onclick="goView('v-home')">←</button>
-    <div><div class="tb-title">Quick Capture</div><div class="tb-sub">Ένας τίτλος · 10 δευτερόλεπτα</div></div>
-  </div>
-  <div class="qc-wrap">
-    <div class="qc-heading">Τι συνέβη;</div>
-    <div class="qc-hint">Μόνο ο τίτλος. Αγκίστρι για το βράδυ.<br>Το υπόλοιπο το γράφεις αργότερα.</div>
-    <textarea id="qc-text" class="qc-ta" placeholder="«Κυρία τραπέζι 25 — 80%»"></textarea>
-    <div class="qc-examples">
-      <div class="qc-ex">π.χ. «Ο κύριος που αρνήθηκε το τραπέζι 3 φορές»</div>
-      <div class="qc-ex">π.χ. «Η Lea χαμογέλασε σε δύσκολο τραπέζι — γιατί;»</div>
-      <div class="qc-ex">π.χ. «Service recovery που πήγε τέλεια ενώ φοβόμουν»</div>
-    </div>
-    <button class="btn-save green" onclick="saveQuick()">⚡ Αποθήκευση</button>
-  </div>
+<div class="variant">
+  <div class="label">Born to Host — Ice Platinum</div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="220" height="220">
+    <defs>
+      <linearGradient id="bgIce" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#050b14"/>
+        <stop offset="50%" style="stop-color:#0a111e"/>
+        <stop offset="100%" style="stop-color:#02050a"/>
+      </linearGradient>
+      <linearGradient id="textIce" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#ffffff"/>
+        <stop offset="50%" style="stop-color:#82b1ff"/>
+        <stop offset="100%" style="stop-color:#2979ff"/>
+      </linearGradient>
+      <radialGradient id="pulseIce" cx="50%" cy="46%" r="42%">
+        <stop offset="0%" style="stop-color:#82b1ff;stop-opacity:0.18"/>
+        <stop offset="100%" style="stop-color:#82b1ff;stop-opacity:0"/>
+      </radialGradient>
+      <filter id="glowI"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <clipPath id="clipI"><rect width="512" height="512" rx="120" ry="120"/></clipPath>
+    </defs>
+    
+    <rect width="512" height="512" rx="120" ry="120" fill="url(#bgIce)"/>
+    <rect width="512" height="512" rx="120" ry="120" fill="url(#pulseIce)"/>
+    <rect width="504" height="504" x="4" y="4" rx="116" ry="116" fill="none" stroke="url(#textIce)" stroke-width="1" opacity="0.2"/>
+    
+    <ellipse cx="256" cy="90" rx="240" ry="100" fill="url(#glossGold)" clip-path="url(#clipI)"/>
+    
+    <text x="256" y="280" font-family="'Futura', 'Helvetica Neue', Arial, sans-serif" font-size="150" font-weight="300" fill="url(#textIce)" text-anchor="middle" letter-spacing="2" filter="url(#glowI)">BtH</text>
+    
+    <line x1="140" y1="320" x2="372" y2="320" stroke="url(#textIce)" stroke-width="1" opacity="0.3"/>
+    
+    <text x="256" y="375" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="300" fill="#ffffff" text-anchor="middle" letter-spacing="16" opacity="0.95">OBSERVATION</text>
+    <text x="256" y="415" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" fill="#82b1ff" text-anchor="middle" letter-spacing="8" opacity="0.6">ARCHIVE</text>
+  </svg>
 </div>
 
-<!-- ENTRY FORM -->
-<div id="v-entry" class="view">
-  <div class="topbar">
-    <button class="tb-back" onclick="goView('v-home')">←</button>
-    <div><div class="tb-title" id="entry-nav-title">Νέα Καταχώρηση</div><div class="tb-sub" id="entry-nav-sub"></div></div>
-  </div>
-  <div class="form-wrap">
-    <input type="hidden" id="ef-id">
-
-    <div class="fg">
-      <div class="flbl">Τίτλος *</div>
-      <div class="fhint">3–5 λέξεις. Αγκίστρι για αναζήτηση αργότερα.</div>
-      <input id="ef-title" class="finput" type="text" placeholder="«Κυρία τραπέζι 25 — 80%»">
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Ημερομηνία</div>
-      <input id="ef-date" class="finput" type="date">
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Βάρδια</div>
-      <div class="chips" id="ef-shift-chips">
-        <button class="chip" data-val="Βραδινό" onclick="toggleChip(this,'shift')">🌙 Βραδινό</button>
-        <button class="chip" data-val="Εκδήλωση" onclick="toggleChip(this,'shift')">🎉 Εκδήλωση</button>
-      </div>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Κατηγορία</div>
-      <div class="fhint">Μία ή δύο maximum</div>
-      <div class="catlist">
-        <button class="catitem" data-val="guest_psychology" onclick="toggleCat(this)">
-          <span class="cat-ico">🧠</span>
-          <div><div class="cat-nm">Ψυχολογία Πελατών</div><div class="cat-ds">Συμπεριφορά, αντιδράσεις, patterns</div></div>
-        </button>
-        <button class="catitem" data-val="service" onclick="toggleCat(this)">
-          <span class="cat-ico">⚙️</span>
-          <div><div class="cat-nm">Service & Επαγγελματισμός</div><div class="cat-ds">Flow, timing, λεπτομέρεια</div></div>
-        </button>
-        <button class="catitem" data-val="leadership" onclick="toggleCat(this)">
-          <span class="cat-ico">🤝</span>
-          <div><div class="cat-nm">Ηγεσία & Ομάδα</div><div class="cat-ds">Επικοινωνία, πίεση, συνεργασία</div></div>
-        </button>
-        <button class="catitem" data-val="emotional" onclick="toggleCat(this)">
-          <span class="cat-ico">🌟</span>
-          <div><div class="cat-nm">Συναισθηματικές Στιγμές</div><div class="cat-ds">Όμορφες ή δύσκολες στιγμές</div></div>
-        </button>
-        <button class="catitem" data-val="self" onclick="toggleCat(this)">
-          <span class="cat-ico">🪞</span>
-          <div><div class="cat-nm">Αυτοπαρατήρηση</div><div class="cat-ds">Κούραση, ενέργεια, αυτογνωσία</div></div>
-        </button>
-        <button class="catitem" data-val="ideas" onclick="toggleCat(this)">
-          <span class="cat-ico">💡</span>
-          <div><div class="cat-nm">Ιδέες & Φιλοσοφία</div><div class="cat-ds">Σκέψεις, φιλοσοφία, ebook</div></div>
-        </button>
-      </div>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Συναισθηματική Χροιά</div>
-      <div class="chips" id="ef-emo-chips">
-        <button class="chip" data-val="Θετικό" onclick="toggleChip(this,'emo')">😊 Θετικό</button>
-        <button class="chip" data-val="Εμπνευσμένο" onclick="toggleChip(this,'emo')">✨ Εμπνευσμένο</button>
-        <button class="chip" data-val="Ουδέτερο" onclick="toggleChip(this,'emo')">😐 Ουδέτερο</button>
-        <button class="chip" data-val="Βαρύ" onclick="toggleChip(this,'emo')">😔 Βαρύ</button>
-        <button class="chip" data-val="Απογοητευτικό" onclick="toggleChip(this,'emo')">😤 Απογοητευτικό</button>
-        <button class="chip" data-val="Όμορφο" onclick="toggleChip(this,'emo')">🥹 Όμορφο</button>
-        <button class="chip" data-val="Λυπηρό" onclick="toggleChip(this,'emo')">😢 Λυπηρό</button>
-      </div>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Επίπεδο Ενέργειας</div>
-      <div class="energy-row">
-        <button class="en-btn" data-val="1" onclick="toggleEnergy(this,'entry')">1</button>
-        <button class="en-btn" data-val="2" onclick="toggleEnergy(this,'entry')">2</button>
-        <button class="en-btn" data-val="3" onclick="toggleEnergy(this,'entry')">3</button>
-        <button class="en-btn" data-val="4" onclick="toggleEnergy(this,'entry')">4</button>
-        <button class="en-btn" data-val="5" onclick="toggleEnergy(this,'entry')">5</button>
-      </div>
-      <div class="en-labels"><span>εξάντληση</span><span>υψηλή ενέργεια</span></div>
-    </div>
-
-    <div class="divider-lbl">Ανάλυση</div>
-
-    <div class="fg">
-      <div class="flbl">Τι συνέβη;</div>
-      <div class="fhint">Αντικειμενικά. Χωρίς υπερβολές. 2–5 προτάσεις.</div>
-      <textarea id="ef-happened" class="fta" placeholder="Τα γεγονότα όπως έγιναν..."></textarea>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Τι παρατήρησα & γιατί έγινε;</div>
-      <div class="fhint">Ανθρώπινη συμπεριφορά + η αιτία όπως την καταλαβαίνεις. Αν δεν ξέρεις, γράψε "δεν ξέρω".</div>
-      <textarea id="ef-observed" class="fta" placeholder="Τι είδα κάτω από την επιφάνεια — και γιατί νομίζω ότι συνέβη..."></textarea>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Πώς αντέδρασα;</div>
-      <div class="fhint">Τι έκανα / τι είπα / τι κράτησα μέσα μου.</div>
-      <textarea id="ef-reacted" class="fta" placeholder="Εσωτερικά ή επαγγελματικά..."></textarea>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Τι έμαθα;</div>
-      <div class="fhint">Pattern ή insight.</div>
-      <textarea id="ef-learned" class="fta" placeholder="Pattern, επανάληψη, σκέψη..."></textarea>
-    </div>
-
-    <div class="fg">
-      <div class="flbl">Τι θα μπορούσε να γίνει καλύτερα;</div>
-      <div class="fhint">Service / επικοινωνία / ηγεσία. Αν ήταν καλό, άφησέ το κενό.</div>
-      <textarea id="ef-better" class="fta" placeholder="Αν ξαναγινόταν, θα..."></textarea>
-    </div>
-
-    <div class="phrase-field">
-      <div class="phrase-lbl">✦ Μία φράση που αξίζει να θυμάμαι</div>
-      <textarea id="ef-phrase" class="phrase-ta" placeholder="«Οι περισσότεροι δύσκολοι πελάτες δεν ζητούν φαγητό. Ζητούν αναγνώριση.»"></textarea>
-    </div>
-
-    <div class="tgl-row">
-      <div><div class="tgl-lbl">⭐ Σημαντικό</div><div style="font-size:.7rem;color:var(--hint);margin-top:2px;font-weight:500">Αξίζει να ξαναδιαβαστεί · Post · Chapter</div></div>
-      <button id="ef-tgl" class="tgl" onclick="toggleTgl()"><div class="tgl-dot"></div></button>
-    </div>
-
-    <button class="btn-save" onclick="saveEntry()">Αποθήκευση Καταχώρησης</button>
-  </div>
-</div>
-
-<!-- WEEKLY REVIEW -->
-<div id="v-weekly" class="view">
-  <div class="topbar">
-    <button class="tb-back" onclick="goView('v-home')">←</button>
-    <div><div class="tb-title">Weekly Review</div><div class="tb-sub">Κάθε Κυριακή · 15 λεπτά</div></div>
-  </div>
-  <div class="form-wrap">
-    <input type="hidden" id="wf-id">
-    <div class="fg">
-      <div class="flbl">Εβδομάδα</div>
-      <input id="wf-date" class="finput" type="date">
-    </div>
-    <div class="weekly-intro">
-      <div class="wi-lbl">Σκοπός</div>
-      <div class="wi-txt">15 λεπτά ανασκόπηση. Χωρίς πίεση. Χωρίς "σωστές" απαντήσεις. Μόνο αλήθεια.</div>
-    </div>
-    <div class="fg"><div class="flbl">Τι με εξάντλησε περισσότερο;</div><textarea id="wf-1" class="fta" placeholder="Άνθρωποι, καταστάσεις, συστήματα..."></textarea></div>
-    <div class="fg"><div class="flbl">Πότε ένιωσα πραγματική φιλοξενία;</div><textarea id="wf-2" class="fta" placeholder="Μια στιγμή που ένιωσα ότι αυτό είναι..."></textarea></div>
-    <div class="fg"><div class="flbl">Ποιο pattern επαναλήφθηκε;</div><textarea id="wf-3" class="fta" placeholder="Ίδιοι πελάτες, ίδιες καταστάσεις..."></textarea></div>
-    <div class="fg"><div class="flbl">Τι έμαθα για ανθρώπους;</div><textarea id="wf-4" class="fta" placeholder="Ανθρώπινη παρατήρηση της εβδομάδας..."></textarea></div>
-    <div class="fg"><div class="flbl">Τι έμαθα για μένα;</div><textarea id="wf-5" class="fta" placeholder="Αυτογνωσία, αντιδράσεις, όρια..."></textarea></div>
-    <div class="fg"><div class="flbl">Πότε ήμουν καλύτερος επαγγελματίας;</div><textarea id="wf-6" class="fta" placeholder="Συγκεκριμένη στιγμή..."></textarea></div>
-    <div class="fg"><div class="flbl">Τι δεν θέλω να επαναληφθεί;</div><textarea id="wf-7" class="fta" placeholder="Χωρίς αυτοκριτική. Απλώς: τι αποφεύγω;"></textarea></div>
-    <div class="phrase-field blue">
-      <div class="phrase-lbl">✦ Φράση της εβδομάδας</div>
-      <textarea id="wf-phrase" class="phrase-ta" placeholder="Μία σκέψη που κρατάς..."></textarea>
-    </div>
-    <div class="fg">
-      <div class="flbl">Μέση Ενέργεια Εβδομάδας</div>
-      <div class="energy-row">
-        <button class="en-btn" data-val="1" onclick="toggleEnergy(this,'weekly')">1</button>
-        <button class="en-btn" data-val="2" onclick="toggleEnergy(this,'weekly')">2</button>
-        <button class="en-btn" data-val="3" onclick="toggleEnergy(this,'weekly')">3</button>
-        <button class="en-btn" data-val="4" onclick="toggleEnergy(this,'weekly')">4</button>
-        <button class="en-btn" data-val="5" onclick="toggleEnergy(this,'weekly')">5</button>
-      </div>
-      <div class="en-labels"><span>εξάντληση</span><span>υψηλή ενέργεια</span></div>
-    </div>
-    <button class="btn-save" onclick="saveWeekly()">Αποθήκευση Weekly Review</button>
-  </div>
-</div>
-
-<!-- VAULT -->
-<div id="v-vault" class="view">
-  <div class="topbar">
-    <button class="tb-back" onclick="goView('v-home')">←</button>
-    <div><div class="tb-title">Observation Vault</div><div class="tb-sub" id="vault-lbl"></div></div>
-  </div>
-  <div class="vsearch-wrap">
-    <input id="vsearch" class="vsearch" placeholder="🔍  Αναζήτηση…" oninput="renderVault()">
-  </div>
-  <div class="vfilters">
-    <button class="vfc on" data-f="all" onclick="setFilter(this,'all')">Όλα</button>
-    <button class="vfc" data-f="__quick" onclick="setFilter(this,'__quick')">⚡ Quick</button>
-    <button class="vfc" data-f="__worth" onclick="setFilter(this,'__worth')">⭐ Σημαντικά</button>
-    <button class="vfc" data-f="__weekly" onclick="setFilter(this,'__weekly')">📅 Weekly</button>
-    <button class="vfc" data-f="guest_psychology" onclick="setFilter(this,'guest_psychology')">🧠 Ψυχολογία</button>
-    <button class="vfc" data-f="service" onclick="setFilter(this,'service')">⚙️ Service</button>
-    <button class="vfc" data-f="leadership" onclick="setFilter(this,'leadership')">🤝 Ομάδα</button>
-    <button class="vfc" data-f="emotional" onclick="setFilter(this,'emotional')">🌟 Συναίσθημα</button>
-    <button class="vfc" data-f="self" onclick="setFilter(this,'self')">🪞 Αυτο</button>
-    <button class="vfc" data-f="ideas" onclick="setFilter(this,'ideas')">💡 Ιδέες</button>
-  </div>
-  <div id="elist" class="elist"></div>
-  <div class="expbar">
-    <span id="exp-count" style="font-size:.68rem;color:var(--muted);font-weight:600"></span>
-    <button class="expbtn" onclick="exportData()">↓ Export JSON</button>
-  </div>
-</div>
-
-<!-- DETAIL -->
-<div id="v-detail" class="view">
-  <div class="topbar">
-    <button class="tb-back" onclick="goView('v-vault');renderVault()">←</button>
-    <div><div class="tb-title" id="detail-nav-title">Παρατήρηση</div><div class="tb-sub" id="detail-nav-date"></div></div>
-  </div>
-  <div id="dbody" class="dbody"></div>
-</div>
-
-</div>
-<div id="toast" class="toast" style="display:none"></div>
-
-<script>
-const KEY='obs_v6';
-let db=JSON.parse(localStorage.getItem(KEY)||'[]');
-let activeFilter='all',currentId=null;
-let eWorth=false,eShift='',eEmo='',eEnergy='',wEnergy='';
-let eCats=[];
-
-function persist(){localStorage.setItem(KEY,JSON.stringify(db));}
-function today(){return new Date().toISOString().split('T')[0];}
-function fmtDate(iso){if(!iso)return'';return new Date(iso).toLocaleDateString('el-GR',{day:'2-digit',month:'short',year:'numeric'});}
-function uid(){return Date.now()+Math.random().toString(36).slice(2,6);}
-
-function goView(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-  if(id==='v-home')updateHome();
-}
-
-function updateHome(){
-  document.getElementById('home-day').textContent=new Date().toLocaleDateString('el-GR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('home-count').textContent=db.length;
-  document.getElementById('home-quick').textContent=db.filter(e=>e.quick).length;
-  document.getElementById('home-worth').textContent=db.filter(e=>e.worth).length;
-  const qc=db.filter(e=>e.quick).length;
-  const b=document.getElementById('qbanner');
-  if(qc>0){b.style.display='flex';document.getElementById('qbanner-count').textContent=qc+' quick capture'+(qc>1?'s':'');}
-  else b.style.display='none';
-}
-
-function saveQuick(){
-  const t=document.getElementById('qc-text').value.trim();
-  if(!t)return;
-  db.unshift({id:uid(),date:today(),title:t,quick:true,type:'entry'});
-  persist();document.getElementById('qc-text').value='';
-  showToast('Αποθηκεύτηκε ✓');goView('v-home');
-}
-
-function toggleChip(btn,group){
-  btn.closest('.chips').querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));
-  btn.classList.add('sel');
-  if(group==='shift')eShift=btn.dataset.val;
-  if(group==='emo')eEmo=btn.dataset.val;
-}
-
-function toggleCat(btn){
-  const val=btn.dataset.val;
-  if(btn.classList.contains('sel')){
-    btn.classList.remove('sel');
-    const ck=btn.querySelector('.cat-ck');if(ck)ck.remove();
-    eCats=eCats.filter(c=>c!==val);
-  }else{
-    if(eCats.length>=2)return showToast('Μέχρι 2 κατηγορίες');
-    btn.classList.add('sel');
-    if(!btn.querySelector('.cat-ck')){const ck=document.createElement('span');ck.className='cat-ck';ck.textContent='✓';btn.appendChild(ck);}
-    eCats.push(val);
-  }
-}
-
-function toggleEnergy(btn,scope){
-  const sel=scope==='entry'?'#v-entry .en-btn':'#v-weekly .en-btn';
-  document.querySelectorAll(sel).forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-  if(scope==='entry')eEnergy=btn.dataset.val;else wEnergy=btn.dataset.val;
-}
-
-function toggleTgl(){
-  eWorth=!eWorth;
-  document.getElementById('ef-tgl').classList.toggle('on',eWorth);
-}
-
-function openEntry(existing){
-  resetEntry();
-  if(existing){
-    document.getElementById('ef-id').value=existing.id;
-    document.getElementById('ef-title').value=existing.title||'';
-    document.getElementById('ef-date').value=existing.date||today();
-    ['happened','observed','reacted','learned','better','phrase'].forEach(k=>{
-      const el=document.getElementById('ef-'+k);if(el)el.value=existing[k]||'';
-    });
-    eWorth=existing.worth||false;
-    document.getElementById('ef-tgl').classList.toggle('on',eWorth);
-    eShift=existing.shift||'';eEmo=existing.emo||'';eEnergy=existing.energy||'';
-    eCats=existing.cats?[...existing.cats]:[];
-    if(eShift)document.querySelectorAll('#ef-shift-chips .chip').forEach(c=>{if(c.dataset.val===eShift)c.classList.add('sel');});
-    if(eEmo)document.querySelectorAll('#ef-emo-chips .chip').forEach(c=>{if(c.dataset.val===eEmo)c.classList.add('sel');});
-    if(eEnergy)document.querySelectorAll('#v-entry .en-btn').forEach(b=>{if(b.dataset.val===eEnergy)b.classList.add('sel');});
-    eCats.forEach(cv=>{
-      const btn=document.querySelector(`.catitem[data-val="${cv}"]`);
-      if(btn){btn.classList.add('sel');if(!btn.querySelector('.cat-ck')){const ck=document.createElement('span');ck.className='cat-ck';ck.textContent='✓';btn.appendChild(ck);}}
-    });
-    document.getElementById('entry-nav-title').textContent=existing.quick?'Επέκταση Quick':'Επεξεργασία';
-  }else{
-    document.getElementById('ef-date').value=today();
-    document.getElementById('entry-nav-title').textContent='Νέα Καταχώρηση';
-  }
-  document.getElementById('entry-nav-sub').textContent=document.getElementById('ef-date').value;
-  goView('v-entry');
-}
-
-function resetEntry(){
-  ['ef-id','ef-title','ef-happened','ef-observed','ef-reacted','ef-learned','ef-better','ef-phrase'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.getElementById('ef-date').value=today();
-  document.querySelectorAll('#v-entry .chip').forEach(c=>c.classList.remove('sel'));
-  document.querySelectorAll('.catitem').forEach(c=>{c.classList.remove('sel');const ck=c.querySelector('.cat-ck');if(ck)ck.remove();});
-  document.querySelectorAll('#v-entry .en-btn').forEach(b=>b.classList.remove('sel'));
-  eWorth=false;eShift='';eEmo='';eEnergy='';eCats=[];
-  document.getElementById('ef-tgl').classList.remove('on');
-}
-
-function saveEntry(){
-  const title=document.getElementById('ef-title').value.trim();
-  if(!title)return showToast('Χρειάζεται τίτλος');
-  const id=document.getElementById('ef-id').value;
-  const entry={
-    id:id||uid(),type:'entry',quick:false,
-    date:document.getElementById('ef-date').value||today(),title,
-    shift:eShift,cats:[...eCats],emo:eEmo,energy:eEnergy,
-    happened:document.getElementById('ef-happened').value,
-    observed:document.getElementById('ef-observed').value,
-    reacted:document.getElementById('ef-reacted').value,
-    learned:document.getElementById('ef-learned').value,
-    better:document.getElementById('ef-better').value,
-    phrase:document.getElementById('ef-phrase').value,
-    worth:eWorth,
-  };
-  if(id){const idx=db.findIndex(e=>e.id===id);if(idx>=0)db[idx]=entry;else db.unshift(entry);}
-  else db.unshift(entry);
-  persist();showToast('Αποθηκεύτηκε ✓');
-  goView('v-vault');renderVault();
-}
-
-function openWeekly(existing){
-  ['wf-id','wf-1','wf-2','wf-3','wf-4','wf-5','wf-6','wf-7','wf-phrase'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.querySelectorAll('#v-weekly .en-btn').forEach(b=>b.classList.remove('sel'));
-  wEnergy='';document.getElementById('wf-date').value=today();
-  if(existing){
-    document.getElementById('wf-id').value=existing.id;
-    document.getElementById('wf-date').value=existing.date||today();
-    ['1','2','3','4','5','6','7','phrase'].forEach(k=>{const el=document.getElementById('wf-'+k);if(el)el.value=existing['q'+k]||'';});
-    wEnergy=existing.energy||'';
-    if(wEnergy)document.querySelectorAll('#v-weekly .en-btn').forEach(b=>{if(b.dataset.val===wEnergy)b.classList.add('sel');});
-  }
-  goView('v-weekly');
-}
-
-function saveWeekly(){
-  const id=document.getElementById('wf-id').value;
-  const d=document.getElementById('wf-date').value||today();
-  const entry={
-    id:id||uid(),type:'weekly',date:d,
-    title:'Weekly Review — '+fmtDate(d),
-    q1:document.getElementById('wf-1').value,q2:document.getElementById('wf-2').value,
-    q3:document.getElementById('wf-3').value,q4:document.getElementById('wf-4').value,
-    q5:document.getElementById('wf-5').value,q6:document.getElementById('wf-6').value,
-    q7:document.getElementById('wf-7').value,qphrase:document.getElementById('wf-phrase').value,
-    energy:wEnergy,
-  };
-  if(id){const idx=db.findIndex(e=>e.id===id);if(idx>=0)db[idx]=entry;else db.unshift(entry);}
-  else db.unshift(entry);
-  persist();showToast('Weekly Review αποθηκεύτηκε ✓');
-  goView('v-vault');renderVault();
-}
-
-const CAT_LABELS={guest_psychology:'🧠 Ψυχολογία',service:'⚙️ Service',leadership:'🤝 Ομάδα',emotional:'🌟 Συναίσθημα',self:'🪞 Αυτοπαρατήρηση',ideas:'💡 Ιδέες'};
-
-function setFilter(btn,f){
-  document.querySelectorAll('.vfc').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');activeFilter=f;renderVault();
-}
-
-function renderVault(){
-  const q=(document.getElementById('vsearch').value||'').toLowerCase();
-  let rows=db.filter(e=>{
-    if(activeFilter==='__quick')return e.quick;
-    if(activeFilter==='__worth')return e.worth;
-    if(activeFilter==='__weekly')return e.type==='weekly';
-    if(activeFilter!=='all')return(e.cats||[]).includes(activeFilter);
-    return!q||(e.title||'').toLowerCase().includes(q)||(e.happened||'').toLowerCase().includes(q);
-  });
-  if(q&&activeFilter==='all')rows=rows.filter(e=>(e.title||'').toLowerCase().includes(q)||(e.happened||'').toLowerCase().includes(q));
-  document.getElementById('vault-lbl').textContent=rows.length+' / '+db.length+' εγγραφές';
-  document.getElementById('exp-count').textContent=db.length+' εγγραφές';
-  const el=document.getElementById('elist');
-  if(rows.length===0){
-    el.innerHTML=`<div class="empty"><div class="empty-ico">📖</div><div class="empty-h">Καμία καταχώρηση</div><div class="empty-p">Ξεκίνα με ένα Quick Capture<br>ή μια Νέα Καταχώρηση.</div></div>`;return;
-  }
-  el.innerHTML=rows.map(e=>{
-    const cats=(e.cats||[]).map(c=>`<span class="er-tag">${CAT_LABELS[c]||c}</span>`).join('');
-    const badges=[e.quick?'<span class="badge bq">⚡ Quick</span>':'',e.worth?'<span class="badge bs">⭐ Σημαντικό</span>':'',e.type==='weekly'?'<span class="badge bw">📅 Weekly</span>':''].filter(Boolean).join('');
-    const rc=e.quick?'erow quick':e.type==='weekly'?'erow weekly':'erow';
-    return`<div class="${rc}" onclick="openDetail('${e.id}')"><div class="er-date">${fmtDate(e.date)}</div><div class="er-body"><div class="er-title">${e.title}</div><div class="er-meta">${cats}${badges}</div></div></div>`;
-  }).join('');
-}
-
-function openDetail(id){
-  const e=db.find(x=>x.id===id);if(!e)return;
-  currentId=id;
-  document.getElementById('detail-nav-title').textContent=e.type==='weekly'?'Weekly Review':'Παρατήρηση';
-  document.getElementById('detail-nav-date').textContent=fmtDate(e.date);
-  const cats=(e.cats||[]).map(c=>`<span class="dtag">${CAT_LABELS[c]||c}</span>`).join('');
-  const meta=[e.shift?`<span class="dtag">${e.shift}</span>`:'',e.emo?`<span class="dtag">${e.emo}</span>`:'',e.energy?`<span class="dtag">⚡ ${e.energy}/5</span>`:'',e.worth?'<span class="badge bs">⭐ Σημαντικό</span>':'',e.quick?'<span class="badge bq">⚡ Quick</span>':''].filter(Boolean).join('');
-  let html=`<div class="dtitle">${e.title}</div><div class="dmeta"><span class="dmeta-date">${fmtDate(e.date)}</span>${cats}${meta}</div>`;
-  if(e.quick){html+=`<div class="exp-banner"><div class="exp-banner-t">Αναμένει πλήρη καταχώρηση</div><button class="btn-save" style="padding:12px" onclick="openEntry(db.find(x=>x.id==='${e.id}'))">Γράψε το πλήρες Entry →</button></div>`;}
-  if(e.type==='weekly'){
-    [{k:'q1',l:'Τι με εξάντλησε;'},{k:'q2',l:'Πότε ένιωσα πραγματική φιλοξενία;'},{k:'q3',l:'Ποιο pattern επαναλήφθηκε;'},{k:'q4',l:'Τι έμαθα για ανθρώπους;'},{k:'q5',l:'Τι έμαθα για μένα;'},{k:'q6',l:'Πότε ήμουν καλύτερος;'},{k:'q7',l:'Τι δεν θέλω να επαναληφθεί;'}].forEach(({k,l})=>{if(e[k])html+=`<div class="dsec"><div class="dsec-lbl">${l}</div><div class="dsec-txt">${e[k]}</div></div>`;});
-    if(e.qphrase)html+=`<div class="dsec"><div class="dsec-lbl">✦ Φράση εβδομάδας</div><div class="dsec-phrase">${e.qphrase}</div></div>`;
-  }else{
-    [{k:'happened',l:'Τι συνέβη;'},{k:'observed',l:'Τι παρατήρησα & γιατί έγινε;'},{k:'reacted',l:'Πώς αντέδρασα;'},{k:'learned',l:'Τι έμαθα;'},{k:'better',l:'Τι θα μπορούσε να γίνει καλύτερα;'}].forEach(({k,l})=>{if(e[k])html+=`<div class="dsec"><div class="dsec-lbl">${l}</div><div class="dsec-txt">${e[k]}</div></div>`;});
-    if(e.phrase)html+=`<div class="dsec"><div class="dsec-lbl">✦ Μία φράση που αξίζει να θυμάμαι</div><div class="dsec-phrase">${e.phrase}</div></div>`;
-  }
-  html+=`<div class="dactions"><button class="dbtn edit" onclick="editFromDetail()">✏️ Επεξεργασία</button><button class="dbtn del" onclick="deleteEntry('${e.id}')">🗑 Διαγραφή</button></div>`;
-  document.getElementById('dbody').innerHTML=html;
-  goView('v-detail');
-}
-
-function editFromDetail(){const e=db.find(x=>x.id===currentId);if(!e)return;if(e.type==='weekly')openWeekly(e);else openEntry(e);}
-function deleteEntry(id){if(!confirm('Διαγραφή;'))return;db=db.filter(e=>e.id!==id);persist();showToast('Διαγράφηκε');goView('v-vault');renderVault();}
-function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='born-to-host-'+today()+'.json';a.click();}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none';},2400);}
-
-updateHome();
-</script>
 </body>
 </html>
-Born-to-host
