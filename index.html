@@ -1,89 +1,280 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bgSapphire" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#040d1a"/>
-      <stop offset="40%" style="stop-color:#0a1931"/>
-      <stop offset="100%" style="stop-color:#020612"/>
-    </linearGradient>
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Born to Host — Icon Graphical Breakdown</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    width: 100vw;
+    min-height: 100vh;
+    background: radial-gradient(circle at 50% 50%, #152438 0%, #0b121f 60%, #05080f 100%);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  /* Blueprint Tech Grid Background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0, 180, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 180, 255, 0.025) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Main Container Layout */
+  .dashboard {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    padding: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .dashboard { grid-template-columns: 1fr; gap: 40px; padding: 20px; }
+  }
+
+  /* Left Column: Icon & Architecture Specs */
+  .left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .panel-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #7995b3;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+
+  /* THE PREMIUM BTH ICON */
+  .icon-wrapper {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    border-radius: 80px;
+    background: radial-gradient(ellipse at 50% 25%, #1d4673 0%, #0c2042 45%, #050d1d 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+      0 0 0 2px rgba(0, 225, 255, 0.4),
+      0 0 30px rgba(0, 160, 255, 0.4),
+      0 0 90px rgba(0, 110, 255, 0.2),
+      inset 0 0 40px rgba(0, 110, 255, 0.15);
+  }
+
+  /* Inner Ring Line */
+  .icon-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 73px;
+    border: 1px solid rgba(0, 225, 255, 0.18);
+    pointer-events: none;
+  }
+
+  /* Glassmorphism Top Curved Gloss */
+  .icon-glass {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    border-radius: 80px 80px 50% 50%;
+    background: linear-gradient(175deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 40%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* SVG Typography for Balanced Kerning */
+  .icon-brand-svg {
+    width: 280px;
+    height: 120px;
+    margin-bottom: 15px;
+  }
+
+  /* Scan / Divider Line */
+  .icon-divider {
+    width: 220px;
+    height: 2px;
+    background: linear-gradient(90deg, #00ffc4 0%, #00e5ff 40%, #0088ff 75%, #0055cc 100%);
+    position: relative;
+    margin-bottom: 15px;
+    box-shadow: 0 0 8px rgba(0,229,255,0.5);
+  }
+  .dot-l, .dot-r {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%; top: 50%; transform: translateY(-50%);
+  }
+  .dot-l { left: -4px; background: #00ffc4; box-shadow: 0 0 8px #00ffc4; }
+  .dot-r { right: -4px; background: #0088ff; box-shadow: 0 0 8px #0088ff; }
+
+  /* Subtitle OBSERVATION */
+  .icon-subtitle {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    color: #aae5f5;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+    margin-bottom: 20px;
+  }
+
+  /* Three Pagination Dots */
+  .icon-dots { display: flex; gap: 12px; }
+  .icon-dots span { width: 7px; height: 7px; border-radius: 50%; background: #0055cc; }
+  .icon-dots span:nth-child(2) { background: #00e5ff; transform: scale(1.3); box-shadow: 0 0 8px #00e5ff; }
+
+  /* Right Column: JSON Code Block Terminal */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .terminal-box {
+    background: rgba(6, 11, 21, 0.65);
+    border: 1px solid rgba(0, 180, 255, 0.15);
+    border-radius: 16px;
+    padding: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #a4bcd5;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,120,255,0.05);
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+
+  .html-tag { color: #569cd6; }
+  .json-key { color: #9cdcfe; }
+  .json-string { color: #ce9178; }
+  .json-attr { color: #b5cea8; }
+
+  /* Vercel Action Button Indicator */
+  .vercel-badge {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 32px;
+    height: 32px;
+    background: #000000;
+    border: 1px solid rgba(0, 180, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px rgba(0, 180, 255, 0.2);
+  }
+  .vercel-triangle {
+    width: 0; height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 12px solid #ffffff;
+  }
+
+  /* Decorative Abstract Star Glow on bottom-right */
+  .star-glow {
+    position: fixed;
+    bottom: 30px; right: 40px;
+    width: 24px; height: 24px;
+    opacity: 0.3;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+  
+  <div class="left-panel">
+    <div class="panel-title">Icon Graphical Layer Breakdown</div>
     
-    <linearGradient id="glassGloss" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18"/>
-      <stop offset="40%" style="stop-color:#ffffff;stop-opacity:0.04"/>
-      <stop offset="80%" style="stop-color:#00b4ff;stop-opacity:0"/>
-    </linearGradient>
+    <div class="icon-wrapper">
+      <div class="icon-glass"></div>
+      
+      <svg class="icon-brand-svg" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="textNeonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00ffcc"/>
+            <stop offset="50%" stop-color="#00e5ff"/>
+            <stop offset="100%" stop-color="#0088ff"/>
+          </linearGradient>
+          <filter id="neonSoftGlow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <text x="15" y="105" font-family="'Arial Black', sans-serif" font-size="115" font-weight="900" fill="url(#textNeonGrad)" filter="url(#neonSoftGlow)">B</text>
+        <text x="105" y="105" font-family="'Arial Black', sans-serif" font-size="88" font-weight="900" fill="url(#textNeonGrad)" filter="url(#neonSoftGlow)">t</text>
+        <text x="160" y="105" font-family="'Arial Black', sans-serif" font-size="115" font-weight="900" fill="url(#textNeonGrad)" filter="url(#neonSoftGlow)">H</text>
+      </svg>
+      
+      <div class="icon-divider">
+        <div class="dot-l"></div>
+        <div class="dot-r"></div>
+      </div>
+      
+      <div class="icon-subtitle">OBSERVATION</div>
+      
+      <div class="icon-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
 
-    <linearGradient id="neonBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:0.75"/>
-      <stop offset="50%" style="stop-color:#0088ff;stop-opacity:0.3"/>
-      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:0.6"/>
-    </linearGradient>
+  <div class="right-panel">
+    <div class="panel-title">Code Integration / JSON Configuration</div>
     
-    <linearGradient id="textNeon" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00ffcc"/>
-      <stop offset="35%" style="stop-color:#00e5ff"/>
-      <stop offset="75%" style="stop-color:#0088ff"/>
-      <stop offset="100%" style="stop-color:#0055cc"/>
-    </linearGradient>
+    <div class="terminal-box">
+      <span class="html-tag">&lt;script</span> <span class="json-key">id</span>=<span class="json-string">"BtH-config"</span> <span class="json-key">type</span>=<span class="json-string">"application/json"</span><span class="html-tag">&gt;</span><br>
+      {<br>
+      &nbsp;&nbsp;<span class="json-key">"icon_id"</span>: <span class="json-string">"image_0"</span>,<br>
+      &nbsp;&nbsp;<span class="json-key">"font_color_sync"</span>: <span class="json-string">"emerald-cyan-complement"</span>,<br>
+      &nbsp;&nbsp;<span class="json-key">"glass_depth"</span>: <span class="json-string">"premium"</span>,<br>
+      &nbsp;&nbsp;<span class="json-key">"neon_profile"</span>: <span class="json-string">"sapphire-cyan-v1"</span>,<br>
+      &nbsp;&nbsp;<span class="json-key">"observation_module"</span>: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"state"</span>: <span class="json-string">"active"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"points"</span>: [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-string">"BtH-primary"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-string">"green-sapphire-line"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-string">"obs-text"</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-string">"pulse-dots"</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+      &nbsp;&nbsp;}<br>
+      }<br>
+      <span class="html-tag">&lt;/script&gt;</span>
+      
+      <div class="vercel-badge">
+        <div class="vercel-triangle"></div>
+      </div>
+    </div>
+  </div>
 
-    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#00ffaa"/>
-      <stop offset="40%" style="stop-color:#00e5ff"/>
-      <stop offset="75%" style="stop-color:#0088ff"/>
-      <stop offset="100%" style="stop-color:#0055cc"/>
-    </linearGradient>
+</div>
 
-    <radialGradient id="centerGlow" cx="50%" cy="45%" r="45%">
-      <stop offset="0%" style="stop-color:#00b4ff;stop-opacity:0.28"/>
-      <stop offset="100%" style="stop-color:#00b4ff;stop-opacity:0"/>
-    </radialGradient>
-
-    <filter id="neonBlurHeavy" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
-    <filter id="neonBlurMedium" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter>
-    <filter id="neonBlurLight" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
-    
-    <clipPath id="squircleClip"><rect width="512" height="512" rx="110" ry="110"/></clipPath>
-  </defs>
-  
-  <rect width="472" height="472" x="20" y="20" rx="100" ry="100" fill="#0088ff" opacity="0.3" filter="url(#neonBlurHeavy)"/>
-  
-  <rect width="512" height="512" rx="110" ry="110" fill="url(#bgSapphire)"/>
-  
-  <circle cx="256" cy="230" r="200" fill="url(#centerGlow)"/>
-  
-  <rect width="504" height="504" x="4" y="4" rx="106" ry="106" fill="none" stroke="url(#neonBorder)" stroke-width="2.5"/>
-  <rect width="494" height="494" x="9" y="9" rx="101" ry="101" fill="none" stroke="#040d1a" stroke-width="2" opacity="0.9"/>
-  
-  <g filter="url(#neonBlurHeavy)" opacity="0.4">
-    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#00e5ff">B</text>
-    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="#00e5ff">t</text>
-    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#00e5ff">H</text>
-  </g>
-  <g filter="url(#neonBlurMedium)" opacity="0.65">
-    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">B</text>
-    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="url(#textNeon)">t</text>
-    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">H</text>
-  </g>
-  
-  <g filter="url(#neonBlurLight)">
-    <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">B</text>
-    <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="url(#textNeon)">t</text>
-    <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="url(#textNeon)">H</text>
-  </g>
-  <text x="75" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#ffffff" opacity="0.9">B</text>
-  <text x="195" y="275" font-family="'Arial Black', sans-serif" font-size="118" font-weight="900" fill="#ffffff" opacity="0.9">t</text>
-  <text x="268" y="275" font-family="'Arial Black', sans-serif" font-size="152" font-weight="900" fill="#ffffff" opacity="0.9">H</text>
-
-  <line x1="120" y1="324" x2="392" y2="324" stroke="url(#lineGrad)" stroke-width="2.5" opacity="0.85" filter="url(#neonBlurLight)"/>
-  <circle cx="114" cy="324" r="5.5" fill="#00ffaa" filter="url(#neonBlurLight)"/>
-  <circle cx="398" cy="324" r="5.5" fill="#0088ff" filter="url(#neonBlurLight)"/>
-
-  <text x="256" y="385" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="300" fill="#ffffff" text-anchor="middle" letter-spacing="18" opacity="0.95" filter="url(#neonBlurLight)">OBSERVATION</text>
-  <text x="256" y="385" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="300" fill="#98ddf0" text-anchor="middle" letter-spacing="18">OBSERVATION</text>
-  
-  <circle cx="216" cy="440" r="5" fill="#00ffcc" opacity="0.5" filter="url(#neonBlurLight)"/>
-  <circle cx="256" cy="440" r="7" fill="#00e5ff" opacity="0.95" filter="url(#neonBlurLight)"/>
-  <circle cx="398" cy="324" r="5.5" fill="#0088ff" filter="url(#neonBlurLight)"/>
-  <circle cx="296" cy="440" r="5" fill="#0055cc" opacity="0.5" filter="url(#blurLight)"/>
-  
-  <path d="M 5,160 Q 256,330 507,160 L 507,5 C 507,5 256,5 5,5 Z" fill="url(#glassGloss)" clip-path="url(#squircleClip)"/>
+<svg class="star-glow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 0L14.8 9.2L24 12L14.8 14.8L12 24L9.2 14.8L0 12L9.2 9.2L12 0Z" fill="#7995b3"/>
 </svg>
+
+</body>
+</html>
